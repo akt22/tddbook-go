@@ -9,6 +9,7 @@ func TestMoneyMultplication(t *testing.T)  {
 		t.Errorf("want 10, got %d", product.amount)
 	}
 
+	// 副作用をテスト
 	product = five.times(3)
 	if product.amount != 15 {
 		t.Errorf("want 15, got %d", product.amount)
