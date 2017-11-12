@@ -9,7 +9,7 @@ type IMoney interface {
 }
 
 type Money struct {
-	amount int
+	amount   int
 	currency string
 }
 
@@ -37,7 +37,7 @@ type Dollar struct {
 func NewDollar(amount int) *Dollar {
 	return &Dollar{
 		Money{
-			amount: amount,
+			amount:   amount,
 			currency: "USD",
 		},
 	}
@@ -46,7 +46,7 @@ func NewDollar(amount int) *Dollar {
 func (d *Dollar) times(multiplier int) *Dollar {
 	return &Dollar{
 		Money{
-			amount: d.Money.amount * multiplier,
+			amount:   d.Money.amount * multiplier,
 			currency: "USD",
 		},
 	}
@@ -62,7 +62,7 @@ type Franc struct {
 func NewFranc(amount int) *Franc {
 	return &Franc{
 		Money{
-			amount: amount,
+			amount:   amount,
 			currency: "CHF",
 		},
 	}
@@ -71,7 +71,7 @@ func NewFranc(amount int) *Franc {
 func (f *Franc) times(multiplier int) *Franc {
 	return &Franc{
 		Money{
-			amount: f.Money.amount * multiplier,
+			amount:   f.Money.amount * multiplier,
 			currency: "CHF",
 		},
 	}
