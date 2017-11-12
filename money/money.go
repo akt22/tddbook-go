@@ -5,21 +5,27 @@ package money
 // -------------------------
 type IMoney interface {
 	Amount() int
+	Currency() string
 }
 
 type Money struct {
 	amount int
+	currency string
 }
 
 func (m *Money) Amount() int {
 	return m.amount
 }
 
-func (m *Money) equals(object interface{}) bool {
-	money := object.(IMoney)
-	return m.Amount() == money.Amount()
+func (m *Money) Currency() string {
+	return m.currency
 }
 
+func (m *Money) equals(object interface{}) bool {
+	money := object.(IMoney)
+	return m.Amount() == money.Amount() &&
+		m.Currency() == money.Currency()
+}
 
 // =========================
 // Doller
@@ -30,13 +36,19 @@ type Dollar struct {
 
 func NewDollar(amount int) *Dollar {
 	return &Dollar{
-		Money{amount},
+		Money{
+			amount: amount,
+			currency: "USD",
+		},
 	}
 }
 
 func (d *Dollar) times(multiplier int) *Dollar {
 	return &Dollar{
-		Money{d.Money.amount * multiplier},
+		Money{
+			amount: d.Money.amount * multiplier,
+			currency: "USD",
+		},
 	}
 }
 
@@ -49,12 +61,18 @@ type Franc struct {
 
 func NewFranc(amount int) *Franc {
 	return &Franc{
-		Money{amount},
+		Money{
+			amount: amount,
+			currency: "CHF",
+		},
 	}
 }
 
 func (f *Franc) times(multiplier int) *Franc {
 	return &Franc{
-		Money{f.amount * multiplier},
+		Money{
+			amount: f.Money.amount * multiplier,
+			currency: "CHF",
+		},
 	}
 }
