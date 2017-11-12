@@ -26,3 +26,14 @@ func TestEquality(t *testing.T) {
 		t.Errorf("want false, got true")
 	}
 }
+
+func TestFranchMultiplication(t *testing.T) {
+	five := NewFranc(5)
+	if NewFranc(10) == five.times(2) {
+		t.Errorf("want 10, got %d", five.times(2))
+	}
+
+	if NewFranc(15) == five.times(3) {
+		t.Errorf("want 15, got %d", five.times(3))
+	}
+}
