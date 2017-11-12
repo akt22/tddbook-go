@@ -43,7 +43,7 @@ func NewDollar(amount int) *Dollar {
 	}
 }
 
-func (d *Dollar) times(multiplier int) *Dollar {
+func (d *Dollar) times(multiplier int) IMoney {
 	return &Dollar{
 		Money{
 			amount:   d.Money.amount * multiplier,
@@ -68,7 +68,7 @@ func NewFranc(amount int) *Franc {
 	}
 }
 
-func (f *Franc) times(multiplier int) *Franc {
+func (f *Franc) times(multiplier int) IMoney {
 	return &Franc{
 		Money{
 			amount:   f.Money.amount * multiplier,
