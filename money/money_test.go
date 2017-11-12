@@ -18,11 +18,11 @@ func TestMoneyMultplication(t *testing.T) {
 }
 
 func TestEquality(t *testing.T) {
-	d := Dollar{5}
-	if !d.equals(Dollar{5}) {
+	d := NewDollar(5)
+	if !d.equals(NewDollar(5)) {
 		t.Errorf("want same, but different")
 	}
-	if d.equals(Dollar{6}) {
+	if d.equals(NewDollar(6)) {
 		t.Errorf("want false, got true")
 	}
 }
