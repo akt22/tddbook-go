@@ -1,5 +1,7 @@
 package money
 
+import "fmt"
+
 // =========================
 // Money
 // -------------------------
@@ -13,6 +15,13 @@ type Money struct {
 	currency string
 }
 
+func NewMoney(amount int, currency string) *Money {
+	return &Money{
+		amount:   amount,
+		currency: currency,
+	}
+}
+
 func (m *Money) Amount() int {
 	return m.amount
 }
@@ -22,33 +31,30 @@ func (m *Money) Currency() string {
 }
 
 func (m *Money) equals(object interface{}) bool {
-	money := object.(IMoney)
-	return m.Amount() == money.Amount() &&
-		m.Currency() == money.Currency()
+	mm := object.(IMoney)
+	return m.Amount() == mm.Amount() &&
+		m.Currency() == mm.Currency()
+}
+
+func (m *Money) String() string {
+	return fmt.Sprintf("%d %s", m.Amount(), m.Currency())
+}
+
+func (m *Money) times(multiplier int) *Money {
+	return NewMoney(m.Amount()*multiplier, m.Currency())
 }
 
 // =========================
-// Doller
+// Dollar
 // -------------------------
 type Dollar struct {
 	Money
 }
 
-func NewDollar(amount int) *Dollar {
-	return &Dollar{
-		Money{
-			amount:   amount,
-			currency: "USD",
-		},
-	}
-}
-
-func (d *Dollar) times(multiplier int) IMoney {
-	return &Dollar{
-		Money{
-			amount:   d.Money.amount * multiplier,
-			currency: "USD",
-		},
+func NewDollar(amount int) *Money {
+	return &Money{
+		amount:   amount,
+		currency: "USD",
 	}
 }
 
@@ -59,20 +65,9 @@ type Franc struct {
 	Money
 }
 
-func NewFranc(amount int) *Franc {
-	return &Franc{
-		Money{
-			amount:   amount,
-			currency: "CHF",
-		},
-	}
-}
-
-func (f *Franc) times(multiplier int) IMoney {
-	return &Franc{
-		Money{
-			amount:   f.Money.amount * multiplier,
-			currency: "CHF",
-		},
+func NewFranc(amount int) *Money {
+	return &Money{
+		amount:   amount,
+		currency: "CHF",
 	}
 }

@@ -39,7 +39,7 @@ func TestEquality(t *testing.T) {
 	}
 }
 
-func TestFranchMultiplication(t *testing.T) {
+func TestFrancMultiplication(t *testing.T) {
 	five := NewFranc(5)
 	if NewFranc(10) == five.times(2) {
 		t.Errorf("want 10, got %d", five.times(2))
@@ -47,5 +47,14 @@ func TestFranchMultiplication(t *testing.T) {
 
 	if NewFranc(15) == five.times(3) {
 		t.Errorf("want 15, got %d", five.times(3))
+	}
+}
+
+func TestCurrency(t *testing.T) {
+	if "USD" != NewDollar(1).Currency() {
+		t.Errorf("want USD, got %s", NewDollar(1).Currency())
+	}
+	if "CHF" != NewFranc(1).Currency() {
+		t.Errorf("want CHF, got %s", NewFranc(1).Currency())
 	}
 }
