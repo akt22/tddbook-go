@@ -6,6 +6,7 @@ import (
 
 func TestMoneyMultplication(t *testing.T) {
 	five := NewDollar(5)
+	// 掛け算のテスト & 等価性のテストが通っているという仮定の基進んだ
 	if NewDollar(10) == five.times(2) {
 		t.Errorf("want 10, got %d", five.times(2))
 	}
