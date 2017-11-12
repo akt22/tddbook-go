@@ -6,15 +6,13 @@ import (
 
 func TestMoneyMultplication(t *testing.T) {
 	five := NewDollar(5)
-	product := five.times(2)
-	if product.amount != 10 {
-		t.Errorf("want 10, got %d", product.amount)
+	if NewDollar(10) == five.times(2) {
+		t.Errorf("want 10, got %d", five.times(2))
 	}
 
 	// 副作用をテスト
-	product = five.times(3)
-	if product.amount != 15 {
-		t.Errorf("want 15, got %d", product.amount)
+	if NewDollar(15) == five.times(3) {
+		t.Errorf("want 15, got %d", five.times(3))
 	}
 }
 
