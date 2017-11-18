@@ -15,13 +15,6 @@ type Money struct {
 	currency string
 }
 
-func NewMoney(amount int, currency string) *Money {
-	return &Money{
-		amount:   amount,
-		currency: currency,
-	}
-}
-
 func (m *Money) Amount() int {
 	return m.amount
 }
@@ -41,16 +34,15 @@ func (m *Money) String() string {
 }
 
 func (m *Money) times(multiplier int) *Money {
-	return NewMoney(m.Amount()*multiplier, m.Currency())
+	return &Money{
+		m.Amount() * multiplier,
+		m.Currency(),
+	}
 }
 
 // =========================
 // Dollar
 // -------------------------
-type Dollar struct {
-	Money
-}
-
 func NewDollar(amount int) *Money {
 	return &Money{
 		amount:   amount,
@@ -61,10 +53,6 @@ func NewDollar(amount int) *Money {
 // =========================
 // Franc
 // -------------------------
-type Franc struct {
-	Money
-}
-
 func NewFranc(amount int) *Money {
 	return &Money{
 		amount:   amount,
