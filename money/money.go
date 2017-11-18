@@ -3,7 +3,14 @@ package money
 import "fmt"
 
 // =========================
-// Money
+// Sum
+// -------------------------
+type Sum struct {
+	augend, addend *Money
+}
+
+// =========================
+// Bank
 // -------------------------
 type Bank struct{}
 
@@ -55,10 +62,7 @@ func (m *Money) times(multiplier int) *Money {
 }
 
 func (m *Money) plus(added *Money) Expression {
-	return &Money{
-		amount:   m.amount + added.amount,
-		currency: m.currency,
-	}
+	return &Sum{m, added}
 }
 
 // =========================

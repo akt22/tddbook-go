@@ -47,3 +47,18 @@ func TestSimpleAddiction(t *testing.T) {
 		t.Errorf("want 10, got %d", reduced.Amount())
 	}
 }
+
+func TestPlusReturnsSum(t *testing.T) {
+	five := NewDollar(5)
+	result := five.plus(five)
+	sum, ok := result.(*Sum)
+	if !ok {
+		t.Fatalf("want Sum")
+	}
+	if !five.equals(sum.augend) {
+		t.Errorf("want 5, got %d", sum.augend)
+	}
+	if !five.equals(sum.addend) {
+		t.Errorf("want 5, got %d", sum.addend)
+	}
+}
