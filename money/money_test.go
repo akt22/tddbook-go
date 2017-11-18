@@ -26,27 +26,8 @@ func TestEquality(t *testing.T) {
 		t.Errorf("want false, got true")
 	}
 
-	f := NewFranc(5)
-	if !f.equals(NewFranc(5)) {
-		t.Errorf("want same, but different")
-	}
-	if f.equals(NewFranc(6)) {
-		t.Errorf("want false, got true")
-	}
-
 	if NewFranc(5).equals(NewDollar(5)) {
 		t.Errorf("want false, got true")
-	}
-}
-
-func TestFrancMultiplication(t *testing.T) {
-	five := NewFranc(5)
-	if NewFranc(10) == five.times(2) {
-		t.Errorf("want 10, got %d", five.times(2))
-	}
-
-	if NewFranc(15) == five.times(3) {
-		t.Errorf("want 15, got %d", five.times(3))
 	}
 }
 
