@@ -2,37 +2,31 @@ package money
 
 import "fmt"
 
-// =========================
-// Bank
-// -------------------------
 type Bank struct{}
 
 func (b *Bank) reduce(source Expression, to string) *Money {
-	return source.Reduce(to)
+	money, ok := source.(*Money)
+	if ok {
+		return money
+	}
+	sum, ok := source.(*Sum)
+	if !ok {
+		return nil
+	}
+	return sum.reduce(to)
 }
 
-// =========================
-// Expression
-// -------------------------
-type Expression interface {
-	Reduce(to string) *Money
-}
+type Expression interface{}
 
-// =========================
-// Sum
-// -------------------------
 type Sum struct {
 	addend, augend *Money
 }
 
-func (s *Sum) Reduce(to string) *Money {
+func (s *Sum) reduce(to string) *Money {
 	amount := s.augend.amount + s.addend.amount
 	return NewMoney(amount, to)
 }
 
-// =========================
-// Money
-// -------------------------
 type IMoney interface {
 	Amount() int
 	Currency() string
@@ -56,8 +50,8 @@ func (m *Money) Amount() int {
 
 func (m *Money) equals(object interface{}) bool {
 	mm := object.(IMoney)
-	return m.amount == mm.Amount() &&
-		m.currency == mm.Currency()
+	return m.Amount() == mm.Amount() &&
+		m.Currency() == mm.Currency()
 }
 
 func (m *Money) Currency() string {
@@ -65,27 +59,18 @@ func (m *Money) Currency() string {
 }
 
 func (m *Money) times(multiplier int) *Money {
-	return &Money{
-		m.Amount() * multiplier,
-		m.Currency(),
-	}
+	return NewMoney(m.Amount()*multiplier, m.currency)
 }
 
-func (m *Money) plus(added *Money) Expression {
-	return &Sum{m, added}
+func (m *Money) plus(addend *Money) Expression {
+	return &Sum{m, addend}
+	// return NewMoney(m.amount+addend.amount, m.currency)
 }
 
 func (m *Money) String() string {
-	return fmt.Sprintf("%d %s", m.Amount(), m.Currency())
+	return fmt.Sprintf("%d %s", m.amount, m.currency)
 }
 
-func (m *Money) Reduce(to string) *Money {
-	return m
-}
-
-// =========================
-// Dollar
-// -------------------------
 func NewDollar(amount int) *Money {
 	return &Money{
 		amount:   amount,
@@ -93,9 +78,6 @@ func NewDollar(amount int) *Money {
 	}
 }
 
-// =========================
-// Franc
-// -------------------------
 func NewFranc(amount int) *Money {
 	return &Money{
 		amount:   amount,

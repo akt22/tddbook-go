@@ -1,6 +1,10 @@
 package money
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestMoneyMultplication(t *testing.T) {
 	five := NewDollar(5)
@@ -61,4 +65,17 @@ func TestPlusReturnsSum(t *testing.T) {
 	if !five.equals(sum.addend) {
 		t.Errorf("want 5, got %d", sum.addend)
 	}
+}
+
+func TestReduceSum(t *testing.T) {
+	sum := &Sum{NewDollar(3), NewDollar(4)}
+	bank := Bank{}
+	result := bank.reduce(sum, "USD")
+	assert.Equal(t, NewDollar(7), result)
+}
+
+func TestReduceMoney(t *testing.T) {
+	bank := Bank{}
+	result := bank.reduce(NewDollar(1), "USD")
+	assert.Equal(t, NewDollar(1), result)
 }
