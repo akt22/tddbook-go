@@ -1,8 +1,6 @@
 package money
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestMoneyMultplication(t *testing.T) {
 	five := NewDollar(5)
@@ -37,5 +35,15 @@ func TestCurrency(t *testing.T) {
 	}
 	if "CHF" != NewFranc(1).Currency() {
 		t.Errorf("want CHF, got %s", NewFranc(1).Currency())
+	}
+}
+
+func TestSimpleAddiction(t *testing.T) {
+	five := NewDollar(5)
+	sum := five.plus(five)
+	bank := Bank{}
+	reduced := bank.reduce(sum, "USD")
+	if !NewDollar(10).equals(reduced) {
+		t.Errorf("want 10, got %d", reduced.Amount())
 	}
 }

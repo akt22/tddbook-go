@@ -5,6 +5,20 @@ import "fmt"
 // =========================
 // Money
 // -------------------------
+type Bank struct{}
+
+func (b *Bank) reduce(source Expression, to string) *Money {
+	return NewDollar(10)
+}
+
+// =========================
+// Expression
+// -------------------------
+type Expression interface{}
+
+// =========================
+// Money
+// -------------------------
 type IMoney interface {
 	Amount() int
 	Currency() string
@@ -25,8 +39,8 @@ func (m *Money) Currency() string {
 
 func (m *Money) equals(object interface{}) bool {
 	mm := object.(IMoney)
-	return m.Amount() == mm.Amount() &&
-		m.Currency() == mm.Currency()
+	return m.amount == mm.Amount() &&
+		m.currency == mm.Currency()
 }
 
 func (m *Money) String() string {
@@ -37,6 +51,13 @@ func (m *Money) times(multiplier int) *Money {
 	return &Money{
 		m.Amount() * multiplier,
 		m.Currency(),
+	}
+}
+
+func (m *Money) plus(added *Money) Expression {
+	return &Money{
+		amount:   m.amount + added.amount,
+		currency: m.currency,
 	}
 }
 
