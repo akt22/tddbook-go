@@ -8,14 +8,25 @@ import "fmt"
 type Bank struct{}
 
 func (b *Bank) reduce(source Expression, to string) *Money {
-	return source.Reduce(to)
+	return source.Reduce(*b, to)
+}
+
+func (b *Bank) addRate(from string, to string, rate int) {
+
+}
+
+func (b *Bank) rate(from string, to string) int {
+	if from == "CHF" && to == "USD" {
+		return 2
+	}
+	return 1
 }
 
 // =========================
 // Expression
 // -------------------------
 type Expression interface {
-	Reduce(to string) *Money
+	Reduce(bank Bank, to string) *Money
 }
 
 // =========================
@@ -25,7 +36,7 @@ type Sum struct {
 	addend, augend *Money
 }
 
-func (s *Sum) Reduce(to string) *Money {
+func (s *Sum) Reduce(bank Bank, to string) *Money {
 	amount := s.augend.amount + s.addend.amount
 	return NewMoney(amount, to)
 }
@@ -79,8 +90,9 @@ func (m *Money) String() string {
 	return fmt.Sprintf("%d %s", m.Amount(), m.Currency())
 }
 
-func (m *Money) Reduce(to string) *Money {
-	return m
+func (m *Money) Reduce(bank Bank, to string) *Money {
+	rate := bank.rate(m.currency, to)
+	NewMoney(m.amount/rate, to)
 }
 
 // =========================
