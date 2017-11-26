@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="money.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="money.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/money/money.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="15" column="15" lean-forward="false" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+            <state relative-caret-position="531">
+              <caret line="47" column="81" lean-forward="true" selection-start-line="47" selection-start-column="81" selection-end-line="47" selection-end-column="81" />
               <folding>
                 <element signature="e#15#27#0" expanded="true" />
               </folding>
@@ -37,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="money_test.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="money_test.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/money/money_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="83" column="21" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
+            <state relative-caret-position="760">
+              <caret line="99" column="22" lean-forward="false" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
               <folding>
                 <element signature="e#15#75#0" expanded="true" />
               </folding>
@@ -61,6 +61,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>{</find>
+      <find>re</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="/usr/local/Cellar/go/1.7.3/libexec" />
@@ -77,8 +78,8 @@
       <list>
         <option value="$PROJECT_DIR$/money.go" />
         <option value="$PROJECT_DIR$/money/tmp.go" />
-        <option value="$PROJECT_DIR$/money/money.go" />
         <option value="$PROJECT_DIR$/money/money_test.go" />
+        <option value="$PROJECT_DIR$/money/money.go" />
       </list>
     </option>
   </component>
@@ -251,12 +252,12 @@
       <workItem from="1510465563870" duration="8716000" />
       <workItem from="1511008094643" duration="4797000" />
       <workItem from="1511707460364" duration="120000" />
-      <workItem from="1511707644265" duration="2659000" />
+      <workItem from="1511707644265" duration="2936000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16292000" />
+    <option name="totallyTimeSpent" value="16569000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="976" extended-state="0" />
@@ -367,22 +368,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/money.go" />
     <entry file="file://$PROJECT_DIR$/money/tmp.go" />
-    <entry file="file://$PROJECT_DIR$/money/money.go">
+    <entry file="file://$PROJECT_DIR$/money/money_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="15" column="15" lean-forward="false" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+        <state relative-caret-position="760">
+          <caret line="99" column="22" lean-forward="false" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
           <folding>
-            <element signature="e#15#27#0" expanded="true" />
+            <element signature="e#15#75#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/money/money_test.go">
+    <entry file="file://$PROJECT_DIR$/money/money.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="83" column="21" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
+        <state relative-caret-position="531">
+          <caret line="47" column="81" lean-forward="true" selection-start-line="47" selection-start-column="81" selection-end-line="47" selection-end-column="81" />
           <folding>
-            <element signature="e#15#75#0" expanded="true" />
+            <element signature="e#15#27#0" expanded="true" />
           </folding>
         </state>
       </provider>
