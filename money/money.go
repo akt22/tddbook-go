@@ -5,21 +5,29 @@ import "fmt"
 // =========================
 // Bank
 // -------------------------
-type Bank struct{}
+type Bank struct {
+	rates map[Pair]int
+}
 
 func (b *Bank) reduce(source Expression, to string) *Money {
 	return source.Reduce(*b, to)
 }
 
 func (b *Bank) addRate(from string, to string, rate int) {
-
+	b.rates[Pair{from, to}] = rate
 }
 
-func (b *Bank) rate(from string, to string) int {
-	if from == "CHF" && to == "USD" {
-		return 2
+func (b *Bank) rate(from, to string) int {
+	if from == to {
+		return 1
 	}
-	return 1
+	return b.rates[Pair{from, to}]
+}
+
+func NewBank() *Bank {
+	return &Bank{
+		rates: make(map[Pair]int),
+	}
 }
 
 // =========================
@@ -39,6 +47,13 @@ type Sum struct {
 func (s *Sum) Reduce(bank Bank, to string) *Money {
 	amount := s.augend.amount + s.addend.amount
 	return NewMoney(amount, to)
+}
+
+// =========================
+// Pair
+// -------------------------
+type Pair struct {
+	from, to string
 }
 
 // =========================
@@ -67,8 +82,8 @@ func (m *Money) Amount() int {
 
 func (m *Money) equals(object interface{}) bool {
 	mm := object.(IMoney)
-	return m.amount == mm.Amount() &&
-		m.currency == mm.Currency()
+	return m.Amount() == mm.Amount() &&
+		m.Currency() == mm.Currency()
 }
 
 func (m *Money) Currency() string {
@@ -76,23 +91,20 @@ func (m *Money) Currency() string {
 }
 
 func (m *Money) times(multiplier int) *Money {
-	return &Money{
-		m.Amount() * multiplier,
-		m.Currency(),
-	}
+	return NewMoney(m.Amount()*multiplier, m.currency)
 }
 
-func (m *Money) plus(added *Money) Expression {
-	return &Sum{m, added}
-}
-
-func (m *Money) String() string {
-	return fmt.Sprintf("%d %s", m.Amount(), m.Currency())
+func (m *Money) plus(addend *Money) Expression {
+	return &Sum{m, addend}
 }
 
 func (m *Money) Reduce(bank Bank, to string) *Money {
 	rate := bank.rate(m.currency, to)
-	NewMoney(m.amount/rate, to)
+	return NewMoney(m.amount/rate, to)
+}
+
+func (m *Money) String() string {
+	return fmt.Sprintf("%d %s", m.amount, m.currency)
 }
 
 // =========================
