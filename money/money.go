@@ -35,18 +35,23 @@ func NewBank() *Bank {
 // -------------------------
 type Expression interface {
 	Reduce(bank Bank, to string) *Money
+	plus(addend Expression) Expression
 }
 
 // =========================
 // Sum
 // -------------------------
 type Sum struct {
-	addend, augend *Money
+	addend, augend Expression
 }
 
 func (s *Sum) Reduce(bank Bank, to string) *Money {
 	amount := s.augend.Reduce(bank, to).amount + s.addend.Reduce(bank, to).amount
 	return NewMoney(amount, to)
+}
+
+func (s *Sum) plus(addend Expression) Expression {
+	return nil
 }
 
 // =========================
@@ -90,11 +95,11 @@ func (m *Money) Currency() string {
 	return m.currency
 }
 
-func (m *Money) times(multiplier int) *Money {
+func (m *Money) times(multiplier int) Expression {
 	return NewMoney(m.Amount()*multiplier, m.currency)
 }
 
-func (m *Money) plus(addend *Money) Expression {
+func (m *Money) plus(addend Expression) Expression {
 	return &Sum{m, addend}
 }
 
